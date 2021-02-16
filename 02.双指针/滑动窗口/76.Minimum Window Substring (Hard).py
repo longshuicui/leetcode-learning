@@ -19,39 +19,31 @@ https://leetcode.com/problems/minimum-window-substring/
 """
 
 
-def minWindow(S, T):
-    chars={}
-    flag={}
-    for i in range(len(T)):
-        flag[T[i]]=True
-        chars[T[i]]=chars.get(T[i],0)+1
-
-    # 滑动窗口, 不断更改统计数据
-    cnt, l, min_l = 0, 0, 0
-    min_size=len(S)+1
-
-    for r in range(len(S)):
-        # 判断是否在T种
-        if S[r] in flag:
-            chars[S[r]]-=1
-            if chars[S[r]]>=0:
-                cnt+=1
-            # 最短子串可以包含T以外的字符，所以
-            while cnt==len(T):
-                if r-l+1<min_size:
-                    min_l=l
-                    min_size=r-l+1
-                chars[S[l]]+=1
-                if flag[S[l]] and chars[S[l]]>0:
-                    cnt-=1
-                l+=1
-    if min_size> len(S):
+def minWindow(s,t):
+    if not t or not s:
         return ""
-    return S[min_l,min_l+min_size]
-
-
-
-
+    counts={}
+    for c in t:
+        counts[c]=counts.get(c,0)+1
+    formed=0
+    l,r=0,0
+    windowCounts={}
+    ans=float("inf"),None,None
+    while r<len(s):
+        c=s[r]
+        windowCounts[c]=windowCounts.get(c,0)+1
+        if c in counts and windowCounts[c]==counts[c]:
+            formed+=1
+        while l<=r and formed==len(counts): # 都出现了移动左指针
+            c=s[l]
+            if r-l+1 < ans[0]:
+                ans=(r-l+1,l,r)
+            windowCounts[c]-=1
+            if c in counts and windowCounts[c]<counts[c]:
+                formed-=1
+            l+=1
+        r+=1
+    return "" if ans[0]==float("inf") else s[ans[1]:ans[2]+1]
 
 
 S = "ADOBECODEBANC"
