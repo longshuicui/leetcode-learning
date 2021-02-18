@@ -34,5 +34,12 @@ def mySqrt(x):
     return r
 
 
-num=mySqrt(4)
+def newSqrt(x):
+    temp=x
+    while temp*temp>x:
+        temp=(temp+x/temp)//2
+    return int(temp)
+
+
+num=newSqrt(8)
 print(num)
