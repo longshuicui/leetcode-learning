@@ -26,7 +26,7 @@ def search(nums, target):
         mid = start + (end - start) // 2
         if nums[mid] == target:
             return True
-        if nums[start] == nums[mid]:
+        if nums[start] == nums[mid]: # 如果中点的数字和左端的数字相同， 不能确定是左区间完全相同还是右区间完全相同
             start += 1
         elif nums[mid] <= nums[end]:
             # 右区间是增序的
@@ -43,7 +43,7 @@ def search(nums, target):
     return False
 
 
-nums = [1,0,1,1,1]
-target = 0
+nums = [2,5,6,0,0,1,2]
+target = 2
 r = search(nums, target)
 print(r)
