@@ -15,7 +15,6 @@ def heapSort(nums):
     for j in range(l-1,-1,-1):
         nums[0],nums[j]=nums[j],nums[0]
         buildHeap(nums, 0, j-1)
-
     return nums
 
 
@@ -33,7 +32,11 @@ def buildHeap(nums,i, l):
 
 
 
-
-nums=[4, 6, 7, 2, 9, 8, 3, 5, 1]
+import numpy as np
+import time
+nums=np.random.randint(1,20000,20000).tolist()
+print(nums)
+s=time.time()
 nums=heapSort(nums)
 print(nums)
+print(time.time()-s)
