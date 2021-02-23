@@ -47,7 +47,31 @@ def findKthLargest(nums, k):
     return nums[l]
 
 
+def quickSort(nums, left, right):
+    if left>=right:
+        return nums
+    pivot=nums[left]
+    i, j = left, right
+    while i<j:
+        while i<j and nums[i]<=pivot: # 找到pivot左边比pivot大的值
+            i+=1
+        nums[j]=nums[i]
+        while i<j and nums[j]>=pivot: # 找到pivot右边比pivot小的值
+            j-=1
+        nums[i]=nums[j]
+        # nums[i], nums[j]=nums[j], nums[i]
+    nums[j]=pivot
+    quickSort(nums, left, i-1)
+    quickSort(nums, i+1, right)
+    return nums
+
+
+
+
 nums = [3, 2, 1, 5, 6, 4]
-k = 1
-r = findKthLargest(nums, k)
-print(r)
+# k = 3
+# r = findKthLargest(nums, k)
+# print(r)
+
+nums=quickSort(nums, 0, len(nums)-1)
+print(nums)
