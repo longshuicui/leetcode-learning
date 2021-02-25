@@ -18,7 +18,7 @@ def quickSort(nums, low, high):
         while i < j and nums[i] <= pivot:  # 寻找基准左侧比基准大的数
             i += 1
         nums[j] = nums[i]
-        # nums[i],nums[j]=nums[j],nums[i]
+
     nums[j] = pivot
     quickSort(nums, low, i - 1)
     quickSort(nums, i + 1, high)
