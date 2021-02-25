@@ -23,7 +23,7 @@ def buildHeap(nums,i, l):
     largeIndex=i
     if left<=l and nums[i]<nums[left]:
         largeIndex=left
-    if right<=l and nums[left]<nums[right]:
+    if right<=l and max(nums[i], nums[left])<nums[right]:
         largeIndex=right
     # 子节点和左右节点比较，得出三个元素之间较大的下标，如果较大下标不是父节点的下标，说明交换后需要调整大顶堆
     if largeIndex!=i:
@@ -35,6 +35,7 @@ def buildHeap(nums,i, l):
 import numpy as np
 import time
 nums=np.random.randint(1,20000,20000).tolist()
+# nums=[83, 82, 79, 5, 43, 25, 48, 15, 76, 52]
 print(nums)
 s=time.time()
 nums=heapSort(nums)
