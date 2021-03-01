@@ -29,9 +29,39 @@ https://leetcode.com/problems/n-queens/
     满足条件的结果中每一行或列有且仅有一个皇后，如果通过对每一行遍历来插入皇后，就不需要对行建立索引数组
 """
 
+import copy
+
 
 def solveNQueens(n):
-    if n==0:
-        return []
+    ans = []
+    if n == 0:
+        return ans
+    board = [["." for _ in range(n)] for _ in range(n)]
+    column = [False for _ in range(n)]
+    ldiag = [False for _ in range(2 * n - 1)]
+    rdiag = [False for _ in range(2 * n - 1)]
+    backtrack(ans, board, column, ldiag, rdiag, 0, n)
+    return [["".join(b) for b in bb] for bb in ans]
 
-    pass
+
+def backtrack(ans, board, column, ldiag, rdiag, row, n):
+    if row == n:
+        ans.append(copy.deepcopy(board))
+        return
+
+    for i in range(n):
+        if column[i] or ldiag[n - row + i - 1] or rdiag[row + i]:
+            continue
+        # 修改当前节点状态
+        board[row][i] = "Q"
+        column[i] = ldiag[n - row + i - 1] = rdiag[row + i] = True
+        # 递归子节点
+        backtrack(ans, board, column, ldiag, rdiag, row + 1, n)
+        # 回改当前子节点
+        board[row][i] = "."
+        column[i] = ldiag[n - row + i - 1] = rdiag[row + i] = False
+
+
+n = 4
+ans = solveNQueens(n)
+print(ans)
