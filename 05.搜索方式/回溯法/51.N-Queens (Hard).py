@@ -5,7 +5,6 @@
 @function:
 51. N-Queens (Hard)
 https://leetcode.com/problems/n-queens/
-
 题目描述
     给定一个大小为 n 的正方形国际象棋棋盘，求有多少种方式可以放置 n 个皇后并使得她们互
     不攻击，即每一行、列、左斜、右斜最多只有一个皇后。
