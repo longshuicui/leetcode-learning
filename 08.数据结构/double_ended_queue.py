@@ -33,3 +33,4 @@ class DoubleEndedQueue:
             raise ValueError("The deque is empty!")
         item = self.items.pop()
         return item
+
