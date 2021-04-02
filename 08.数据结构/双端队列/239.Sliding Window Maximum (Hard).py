@@ -47,8 +47,23 @@ def maxSlidingWindow(nums, k):
     return res
 
 
+def sumSlidingWindow(nums, k):
+    que=deque()
+    res=[]
+    temp=0
+    for i in range(len(nums)):
+        if que and que[0]==i-k:
+            temp-=nums[que[0]]
+            que.popleft()
+        que.append(i)
+        temp+=nums[i]
+        if i+1>=k:
+            res.append(temp)
+    return max(res)
+
+
 
 nums = [1, 3, -1, -3, 5, 3, 6, 7]
 k = 3
-res = maxSlidingWindow(nums, k)
+res = sumSlidingWindow(nums, k)
 print(res)
