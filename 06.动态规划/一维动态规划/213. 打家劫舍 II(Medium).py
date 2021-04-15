@@ -22,10 +22,10 @@ https://leetcode-cn.com/problems/house-robber-ii/
 
 
 def rob_(nums):
-    dp=[0, nums[0]]
-    for i in range(2, len(nums)+1):
-        dp.append(max(dp[i-1], dp[i-2]+nums[i-1]))
-    return dp[-1]
+    a,b=0,0
+    for i in range(len(nums)):
+        a,b=max(b+nums[i], a), a
+    return a
 
 def rob(nums):
     if len(nums)==1:
