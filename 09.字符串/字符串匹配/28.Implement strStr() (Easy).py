@@ -19,7 +19,35 @@ def strStr(haystack, needle):
     pos=haystack.find(needle)
     return pos
 
+
+def strStrBrute(haystack, needle):
+    m,n=len(haystack), len(needle)
+    if n==0:
+        return 0
+    for i in range(m):
+        if i+n>m: break
+        flag=True
+        for j in range(n):
+            if haystack[i+j]!=needle[j]:
+                flag=False
+                break
+        if flag:
+            return i
+    return -1
+
+
+def strStrKMP(haystack, needle):
+    m, n = len(haystack), len(needle)
+    if n==0:
+        return 0
+    match_table=[0]*n
+    # 根据needle计算前缀后缀匹配值
+
+
+    pass
+
+
 haystack="hello"
 needle="ll"
-pos=strStr(haystack, needle)
+pos=strStrBrute(haystack, needle)
 print(pos)
