@@ -43,11 +43,22 @@ def numDecodings(s):
     return dp[len(s)]
 
 
+def numDecodings_(s):
+    # 状态只与 dp[i-2] dp[i-1] dp[i]有关
+    n=len(s)
+    dp=[1]+[0]*n
+    for i in range(1, n+1):
+        if s[i-1]!="0": # 考虑一个数字的情况
+            dp[i]+=dp[i-1]
+        if i>1 and s[i-2]!="0" and int(s[i-2:i])<=26: # 两个数字的情况
+            dp[i]+=dp[i-2]
+    return dp[-1]
+
 
 
 
 s="226"
-cnt=numDecodings(s)
+cnt=numDecodings_(s)
 print(cnt)
 
 
