@@ -12,6 +12,10 @@ https://leetcode-cn.com/problems/max-sum-of-rectangle-no-larger-than-k/
     输出：2
     输入：matrix = [[2,2,-1]], k = 3
     输出：3
+
+题解：
+ 使用二维前缀和，得出每个矩阵的和，这样的时间复杂度是O(m*m*n*n)
+ 可以固定三边，搜索第四边，这样可以降到O(max(m,n)^2*min(m,n)logmin(m,n))
 """
 
 
