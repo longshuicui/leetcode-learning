@@ -37,20 +37,63 @@ def calEditDistance(source, target):
 
     return dp[m][n]
 
-# TODO
+
+class TreeNode:
+    def __init__(self, word):
+        self.word = word
+        self.children = {}
+
+    def __str__(self):
+        return self.word
+
+
 class BKTree:
-    def __init__(self, threshold):
-        self.childs = {}
+    def __init__(self, words=None):
+        self.root = None
+        if words:
+            for word in words:
+                self.add(word)
 
-    def put(self, word):
-        pass
+    def add(self, word):
+        if self.root is None:
+            self.root = TreeNode(word)
+        else:
+            node = TreeNode(word)
+            curr = self.root
+            distance = self._distance(word, curr.word)
+            while distance in curr.children:
+                curr = curr.children[distance]
+                distance = self._distance(word, curr.word)
+            curr.children[distance] = node
 
-    def query(self, word):
-        pass
+    def search(self, word, threshold):
+        if self.root is None:
+            return
+
+        results=[]
+        stack=[self.root]
+        while len(stack)>0:
+            node=stack.pop()
+            distance=self._distance(word, node.word)
+            if distance<=threshold:
+                results.append(node.word)
+            # 查询子节点
+            for i in range(max(0, distance-threshold), distance+threshold+1):
+                next_node=node.children.get(i)
+                if next_node:
+                    stack.append(next_node)
+        return results
+
+    @staticmethod
+    def _distance(source, target):
+        """求距离"""
+        return calEditDistance(source, target)
 
 
 if __name__ == '__main__':
-    source = "hello"
-    target = "hell"
-    dis = calEditDistance(source, target)
-    print(dis)
+    words = ["最完美的人生终点", "恐怖爆发", "无名指", "下一站说爱你", "湄公河", "国家地理", "葫芦", "欢乐的朋友们", "名剑"]
+    bktree = BKTree(words)
+    while True:
+        input_token = input("Input: ")
+        res = bktree.search(input_token, 2)
+        print(res)
