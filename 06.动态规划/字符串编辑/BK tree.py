@@ -70,16 +70,16 @@ class BKTree:
         if self.root is None:
             return
 
-        results=[]
-        stack=[self.root]
-        while len(stack)>0:
-            node=stack.pop()
-            distance=self._distance(word, node.word)
-            if distance<=threshold:
+        results = []
+        stack = [self.root]
+        while len(stack) > 0:
+            node = stack.pop()
+            distance = self._distance(word, node.word)
+            if distance <= threshold:
                 results.append(node.word)
             # 查询子节点
-            for i in range(max(0, distance-threshold), distance+threshold+1):
-                next_node=node.children.get(i)
+            for i in range(max(0, distance - threshold), distance + threshold + 1):
+                next_node = node.children.get(i)
                 if next_node:
                     stack.append(next_node)
         return results
