@@ -41,7 +41,17 @@ def judgeSquareSum(c):
             right-=1
     return False
 
-c=3
-res=judgeSquareSum(c)
+
+def func(c):
+    for i in range(int(math.sqrt(c))+1):
+        b=math.sqrt(c-i*i)
+        if int(b)==b:
+            print(i, b)
+            return True
+    return False
+
+
+c=10
+res=func(c)
 print(res)
 
