@@ -29,15 +29,16 @@ https://leetcode-cn.com/problems/xor-queries-of-a-subarray/
 
 """
 
+
 def xorQueriesBrute(arr, queries):
     """暴力求解法超时，
     时间复杂度O(nk),n为queries的长度，k为区间最大长度
     额外空间复杂度O(1),常数空间"""
-    res=[]
-    for l,r in queries:
+    res = []
+    for l, r in queries:
         a = 0
-        for i in range(l,r+1):
-            a^=arr[i]
+        for i in range(l, r + 1):
+            a ^= arr[i]
         res.append(a)
     return res
 
@@ -46,23 +47,21 @@ def xorQueriesPre(arr, queries):
     """前缀异或，这里求出每个位置的前面的异或结果，存储下来，这样就不会重复计算了
     时间复杂度O(n+m),n为arr的长度和queries长度的最大值
     空间复杂度O(n),存储前面的异或结果"""
-    pre=[]
-    a=0
+    pre = []
+    a = 0
     for i in range(len(arr)):
-        a^=arr[i]
+        a ^= arr[i]
         pre.append(a)
-    res=[]
-    for l,r in queries:
-        if l-1<0:
+    res = []
+    for l, r in queries:
+        if l - 1 < 0:
             res.append(pre[r])
         else:
-            res.append(pre[l-1]^pre[r])
+            res.append(pre[l - 1] ^ pre[r])
     return res
 
 
-
-arr = [1,3,4,8]
-queries = [[0,1],[1,2],[0,3],[3,3]]
-res=xorQueriesPre(arr, queries)
+arr = [1, 3, 4, 8]
+queries = [[0, 1], [1, 2], [0, 3], [3, 3]]
+res = xorQueriesPre(arr, queries)
 print(res)
-
