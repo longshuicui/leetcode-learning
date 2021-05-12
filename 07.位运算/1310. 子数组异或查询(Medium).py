@@ -43,7 +43,7 @@ def xorQueriesBrute(arr, queries):
 
 
 def xorQueriesPre(arr, queries):
-    """前缀和，这里求出每个位置的前面的异或结果，存储下来，这样就不会重复计算了
+    """前缀异或，这里求出每个位置的前面的异或结果，存储下来，这样就不会重复计算了
     时间复杂度O(n+m),n为arr的长度和queries长度的最大值
     空间复杂度O(n),存储前面的异或结果"""
     pre=[]
